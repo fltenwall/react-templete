@@ -1,9 +1,15 @@
 # react-templete
 A react CLI for creating your react project.
 
-# Installation
+# Install
 ```
-npm install react-templete -g
+$ npm install
+$ npm link
+```
+
+# use npm 使用npm安装
+```
+$ npm install react-templete -g
 ```
 
 # Usage
