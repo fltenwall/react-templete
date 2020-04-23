@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+const program = require('commander');
+
+// 定义当前版本
+// 定义使用方法
+// 编写四个指令
+program
+  .version(require('../package').version)
+  .usage('<command> [options]')
+  .command('init', 'create a new react-project-template');
+
+// 解析命令行参数
+program.parse(process.argv);

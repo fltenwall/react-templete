@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const chalk = require('chalk');
+const ora = require('ora');
+const download = require('download-git-repo');
+const tplObj = require(`${__dirname}/../template`);
+
+program
+  .usage('<template-name> [project-name]');
+program.parse(process.argv);
+
+if (program.args.length < 1) return program.help();
+
+let templateName = program.args[0];
+let projectName = program.args[1];
+
+if (!tplObj[templateName]) {
+  console.log(chalk.red('\n Template does not exit!(没模板啊老铁！！😡) \n '));
+  return
+}
+if (!projectName) {
+  console.log(chalk.red('\n Project should not be empty! （项目名你得给起一个啊兄die😤）\n '));
+  return
+}
+
+url = tplObj[templateName];
+
+console.log(chalk.white('\n Start buliding... （坐稳，老铁，发车了！😂）\n'));
+const spinner = ora("Downloading...");
+spinner.start();
+
+download (
+  url,
+  projectName,
+  err => {
+    if (err) {
+      spinner.fail();
+      console.log(chalk.red(`In't not funny,...you're failed. ${err}（卧槽！失败了😢）`));
+      return
+    }
+
+    spinner.succeed();
+    console.log(chalk.green('\n Greate!Your react-project-template completed (牛逼🐂！成功了！🤣) !'));
+    console.log('\n Let\'s start!');
+    console.log(`\n    cd ${projectName} （切换目录撸码去！(￣_,￣ )）\n`);
+  }
+);
